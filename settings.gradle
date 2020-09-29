@@ -1,3 +1,4 @@
 rootProject.name = 'doppeltjh'
 include 'module-admin'
+include 'module-core'
 
