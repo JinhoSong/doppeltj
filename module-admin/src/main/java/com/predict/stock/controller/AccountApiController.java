@@ -1,11 +1,10 @@
 package com.predict.stock.controller;
 
+
 import com.predict.stock.Dto.account.AccountDtoSaveRequestDto;
-import com.predict.stock.Dto.account.AccountResponseDto;
 import com.predict.stock.account.Account;
 import com.predict.stock.account.AccountService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
