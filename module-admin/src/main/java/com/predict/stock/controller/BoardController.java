@@ -3,7 +3,7 @@ package com.predict.stock.controller;
 
 import com.predict.stock.borad.Board;
 import com.predict.stock.borad.BoardRepository;
-import com.predict.stock.validator.BoradValidator;
+import com.predict.stock.validator.BoardValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +23,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardRepository boardRepository;
-    private final BoradValidator boradValidator;
+    private final BoardValidator boardValidator;
 
     @GetMapping("/list")
     public String list(Model model, @PageableDefault(size=2) Pageable pageable, @RequestParam(required = false, defaultValue = "") String searchText){
@@ -57,7 +57,7 @@ public class BoardController {
 
     @PostMapping("/form")
     public String boardSave(@Valid Board board, BindingResult bindingResult){
-        boradValidator.validate(board, bindingResult);
+        boardValidator.validate(board, bindingResult);
         if(bindingResult.hasErrors()){
             return "board/form";
         }

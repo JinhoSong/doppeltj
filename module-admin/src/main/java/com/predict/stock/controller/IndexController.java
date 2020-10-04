@@ -13,13 +13,11 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, Principal principal){
         if(principal == null){
-
             model.addAttribute("message","hello user");
         }
         else {
             model.addAttribute("message", principal.getName());
         }
-        System.out.println(principal);
         return "index";
     }
 

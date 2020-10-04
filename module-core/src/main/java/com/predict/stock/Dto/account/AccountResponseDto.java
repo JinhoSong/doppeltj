@@ -16,7 +16,7 @@ public class AccountResponseDto {
         this.id=account.getId();
         this.username=account.getUsername();
         this.password=account.getPassword();
-        this.role=account.getRole();
+        //this.role=account.getRole();
     }
 
 }

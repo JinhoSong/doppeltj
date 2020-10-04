@@ -28,7 +28,7 @@ public class AccountDtoSaveRequestDto {
         return Account.builder()
                 .username(username)
                 .password(password)
-                .role("user")
+                //.role("user")
                 .build();
     }
 

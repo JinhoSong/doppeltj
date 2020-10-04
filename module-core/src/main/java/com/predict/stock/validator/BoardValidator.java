@@ -7,7 +7,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class BoradValidator implements Validator {
+public class BoardValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
         return Board.class.equals(clazz);

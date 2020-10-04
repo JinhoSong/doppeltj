@@ -2,12 +2,17 @@ package com.predict.stock.account;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,19 +24,25 @@ public class AccountService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        Account account = accountRepository.findAccountByUsername(username);
-        if(account == null){
-            throw new UsernameNotFoundException(username);
-        }
-        return User.builder()
-                .username(account.getUsername())
-                .password(account.getPassword())
-                .roles((account.getRole()))
-                .build();
+        Account account = accountRepository.findByUsername(username);
+
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority("role_user"));
+        System.out.println(new User(account.getUsername(),account.getPassword(),grantedAuthorities));
+        return new User(account.getUsername(),account.getPassword(),grantedAuthorities);
+
+        // UserDetails를 구현한 객체인 User를 리턴하면된다.
+
     }
+    // 인증을 위한 메소드
+
     public Account save(Account account){
         account.encodePassword(passwordEncoder);
-        return this.accountRepository.save(account);
+        Role role = new Role();
+        role.setId(1l);
+        role.setName("role_user");
+        account.getRoles().add(role);
+        return accountRepository.save(account);
     }
 
     // 요청이 들어오면  account가 들어오면 account의 비밀번호를 인코딩 한 뒤에 저장한다.

@@ -14,14 +14,8 @@
 </head>
 
 <body class="text-center">
-<form class="form-signin" th:action="@{/account/login}" method="post"> <!-- 요청 보내기-->
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <div th:if="${param.error}"  class="alert alert-danger" role="alert">
-        Invalid username and password
-    </div>
-    <div th:if="${param.logout}"  class="alert alert-primary" role="alert">
-        You have been logged out
-    </div>
+<form class="form-signin" th:action="@{/account/register}" method="post"> <!-- 요청 보내기-->
+    <h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
     <label for="username" class="sr-only">username</label>
     <input type="text" id="username" name="username" class="form-control" placeholder="username" required autofocus>
     <label for="password" class="sr-only">password</label>
