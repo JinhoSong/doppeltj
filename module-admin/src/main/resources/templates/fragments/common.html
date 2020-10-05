@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head(title)">
 
@@ -32,9 +32,13 @@
                             th:if="${menu} == 'board'">(current)</span></a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            <a class="btn btn-secondary mr-2 my-2 my-sm-0" th:href="@{/account/register}" sec:authorize="!isAuthenticated()">register</a>
+            <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/account/login}" sec:authorize="!isAuthenticated()">login</a> <!-- 로그인이 안된 경우  -->
+
+            <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+                <span class="text-white mr-2 mx-2" sec:authentication="name">사용자</span>
+                <span class="text-white mr-2 mx-2" sec:authentication="principal.authorities">권한</span>
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">logout</button>
             </form>
         </div>
     </nav>

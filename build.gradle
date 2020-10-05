@@ -61,7 +61,7 @@ subprojects {
 project(':module-core') {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-security'
-        implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+        implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' // 인증여부를 검사하기 위해 추가한 의존성
         compile('org.springframework.boot:spring-boot-starter-data-jpa')
         compile('org.springframework.boot:spring-boot-starter-web')
 
