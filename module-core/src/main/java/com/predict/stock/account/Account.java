@@ -1,6 +1,8 @@
 package com.predict.stock.account;
 
 
+import com.predict.stock.Dto.account.AccountRequestDto;
+import com.predict.stock.Role.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,11 @@ public class Account {
             joinColumns = @JoinColumn(name="account_id"),
             inverseJoinColumns = @JoinColumn(name="role_id"))
     private List<Role> roles = new ArrayList<>(); //null point 방지
+
+    public Account(AccountRequestDto accountRequestDto){
+        this.username=accountRequestDto.getUsername();
+        this.password=accountRequestDto.getPassword();
+    }
 
     @Builder
     public Account(String username, String password, List<Role> roles){

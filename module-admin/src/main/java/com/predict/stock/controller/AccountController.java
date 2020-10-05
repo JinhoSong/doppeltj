@@ -1,14 +1,18 @@
 package com.predict.stock.controller;
 
 
+import com.predict.stock.Dto.account.AccountRequestDto;
 import com.predict.stock.account.Account;
 import com.predict.stock.account.AccountService;
+import com.predict.stock.borad.Board;
+import com.predict.stock.validator.AccountValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,39 +20,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AccountController {
 
     private final AccountService accountService;
-
-    @GetMapping("/{role}/{username}/{password}")
-    public Account createAccount (@ModelAttribute Account account){
-        return accountService.save(account);
-    }
+    private final AccountValidator accountValidator;
 
     @GetMapping("/login")
     public String login(){
         return "/account/login";
     }
 
-//    @PostMapping("/login")
-//    public String login(Account account){
-//        // 넘어오는건 username과 password 이를 검증하려면 username으로 가져온 비밀번호 값과 로직으로 해싱한 값이 일치하면 된다.
-//        System.out.println(account.getId());
-//        if(accountService.loadUserByUsername(account.getUsername()) != null){
-//            // 로그인 성공시 '/'로 redirect 한다.
-//            return "redirect:/";
-//        } else {
-//            return "redirect:/account/login";
-//        }
-//    }
-
     @GetMapping("/register")
-    public String register(){
+    public String register(Model model){
+        model.addAttribute("accountRequestDto",new AccountRequestDto());
         return "/account/register";
     }
 
 
     @PostMapping("/register")
-    public String register(Account account){
-        accountService.save(account);
-        return "redirect:/";
+    public String register(@Valid AccountRequestDto accountRequestDto, BindingResult bindingResult){
+        accountValidator.validate(accountRequestDto, bindingResult);
+        System.out.println(bindingResult.hasErrors());
+        if(bindingResult.hasErrors()) {
+            return "/account/register"; // 실패
+        }
+        else {
+            // 성공
+            accountService.save(accountRequestDto);
+            return "redirect:/";
+        }
     }
 
 }

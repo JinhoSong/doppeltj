@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(accountService).passwordEncoder(passwordEncoder);
     }
-
+    // accountService를 이용하고 passwordEncoder를 사용한다 라는 의미인듯? 자세히는 더 공부해야 될듯
 
     @Override
     public void configure(WebSecurity web) throws Exception

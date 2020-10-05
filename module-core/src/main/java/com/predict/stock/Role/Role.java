@@ -1,5 +1,6 @@
-package com.predict.stock.account;
+package com.predict.stock.Role;
 
+import com.predict.stock.account.Account;
 import lombok.Getter;
 import lombok.Setter;
 

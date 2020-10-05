@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AccountDtoSaveRequestDto {
+public class AccountRequestDto {
 
     private String username;
 
@@ -18,7 +18,7 @@ public class AccountDtoSaveRequestDto {
     private String password_confirm;
 
     @Builder
-    public AccountDtoSaveRequestDto(String username, String password, String password_confirm){
+    public AccountRequestDto(String username, String password, String password_confirm){
         this.username = username;
         this.password = password;
         this.password_confirm = password_confirm;
