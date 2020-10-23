@@ -2,9 +2,7 @@ package com.predict.stock.controller;
 
 
 import com.predict.stock.Dto.account.AccountRequestDto;
-import com.predict.stock.account.Account;
 import com.predict.stock.account.AccountService;
-import com.predict.stock.borad.Board;
 import com.predict.stock.validator.AccountValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -37,7 +35,7 @@ public class AccountController {
     @PostMapping("/register")
     public String register(@Valid AccountRequestDto accountRequestDto, BindingResult bindingResult){
         accountValidator.validate(accountRequestDto, bindingResult);
-        System.out.println(bindingResult.hasErrors());
+        //System.out.println(bindingResult.hasErrors());
         if(bindingResult.hasErrors()) {
             return "/account/register"; // 실패
         }

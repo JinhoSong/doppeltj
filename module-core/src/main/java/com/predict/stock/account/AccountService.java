@@ -32,7 +32,7 @@ public class AccountService implements UserDetailsService {
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("role_user"));
-        System.out.println(new User(account.getUsername(),account.getPassword(),grantedAuthorities));
+        //System.out.println(new User(account.getUsername(),account.getPassword(),grantedAuthorities));
         return new User(account.getUsername(),account.getPassword(),grantedAuthorities);
 
         // UserDetails를 구현한 객체인 User를 리턴하면된다.

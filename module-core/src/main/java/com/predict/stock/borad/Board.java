@@ -1,14 +1,14 @@
 package com.predict.stock.borad;
 
+import com.predict.stock.material.Material;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,4 +26,8 @@ public class Board {
     @NotNull
     @Size(min=1,message="내용을 입력해주세요")
     private String content;
+
+    @OneToMany
+    @OrderBy("id ASC")
+    private List<Material> materials = new ArrayList<>();
 }

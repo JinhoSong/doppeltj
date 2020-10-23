@@ -56,7 +56,8 @@ public class BoardController {
     }
 
     @PostMapping("/form")
-    public String boardSave(@Valid Board board, BindingResult bindingResult){
+    public String boardSave(@Valid Board board,BindingResult bindingResult){
+        System.out.println(board);
         boardValidator.validate(board, bindingResult);
         if(bindingResult.hasErrors()){
             return "board/form";

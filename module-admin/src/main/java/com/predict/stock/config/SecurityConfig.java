@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .mvcMatchers("/", "/static/css/**","/static/js/**","/account/register","/account/login").permitAll()
+                    .mvcMatchers("/", "/static/css/**", "/webapp/js/**","/account/register","/account/login").permitAll()
                     .mvcMatchers("/admin").hasRole("role_admin")
                     .anyRequest().authenticated()
                     .and()
